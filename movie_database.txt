@@ -1,0 +1,197 @@
+create table actor(
+act_id int Primary Key,
+act_fname char(20),
+act_lname char(20),
+act_gender char(1)
+);
+
+insert into actor values
+(1001,'Hrithik','Roshan','M'),
+(1002,'Deepika','Padukone','F'),
+(1003,'Akshay','Kumar','M'),
+(1004,'Allu','Arjun','M'),
+(1005,'Aamir','Khan','M'),
+(1006,'Anushka','Sharma','F'),
+(1007,'Samantha','Prabhu','F'),
+(1008,'Yash','Gowda','M'),
+(1009,'Tamannaah','Bhatia','M'),
+(1010,'Ayushmann','Khurrana','M');
+
+
+
+__________________________________________________________________________
+
+
+create table director(
+dir_id int Primary Key,
+dir_fname char(20),
+dir_lname char(20)
+);
+
+insert into director values
+(2001,'Rakesh','Roshan'),
+(2002,'Jagan','Shakti'),
+(2003,'Sukumar','Bandreddi'),
+(2004,'Ahwiny','Iyer Tiwari'),
+(2005,'Shoojit','Sircar'),
+(2006,'Prashanth','Neel'),
+(2007,'Koduri Srisaila Sri','Rajmouli'),
+(2008,'Atlee','Kumar'),
+(2009,'Karan','Johar'),
+(2010,'Rajkumar','Hirani');
+______________________________________________________________________________
+
+create table movie(
+mov_id int Primary Key,
+mov_title char(50),
+mov_year int,
+mov_time int,
+mov_lang char(50),
+mov_dt_rel date,
+move_re_country char(5)
+);
+
+
+insert into movie values
+(101,'Piku',2015,122,'Hindi','2015-05-15','India'),
+(102,'3 Idiots',2009,171,'Hindi,English','2009-12-25','India'),
+(103,'Mission Mangal',2019,127,'Hindi','2019-08-15','India'),
+(104,'K.G.F',2018,155,'Kannada,Hindi,Tamil','2018-12-20','India,US'),
+(105,'Bareilly Ki Barfi',2017,116,'Hindi','2017-08-18','India'),
+(106,'Koi... Mil Gaya',2003,157,'Hindi','2003-08-08','India'),
+(107,'Pushpa: The Rise',2021,178,'Telugu,Hindi','2021-12-17','India'),
+(108,'Ae Dil Hai Mushkil',2016,157,'Hindi','2016-10-28','India'),
+(109,'Bahubali: The Beginning',2015,159,'Teligu,Tamil,Hindi,Malayalam','2015-01-10','India'),
+(110,'Theri',2016,150,'Tamil','2016-04-14','India');
+_____________________________________________________________________________________
+
+create table movie_cast(
+act_id int,
+mov_id int,
+role char(30),
+foreign key(act_id) references actor(act_id ),
+foreign key(mov_id) references movie(mov_id )
+);
+
+insert into movie_cast values
+(1001,106,'Lead Actor'),
+(1002,101,'Lead Actress'),
+(1003,103,'Lead Actor'),
+(1004,107,'Lead Actor'),
+(1005,102,'Lead Actor'),
+(1006,108,'Second Lead Actress'),
+(1007,110,'Lead Actress'),
+(1008,104,'Lead Actor'),
+(1009,109,'Lead Actress'),
+(1010,105,'Lead Actor');
+
+_____________________________________________
+
+create table movie_direction(
+dir_id int,
+mov_id int,
+foreign key(dir_id) references director(dir_id ),
+foreign key(mov_id) references movie(mov_id )
+);
+
+insert into movie_direction values
+(2001,106),
+(2002,103),
+(2003,107),
+(2004,105),
+(2005,101),
+(2006,104),
+(2007,109),
+(2008,110),
+(2009,108),
+(2010,102);
+
+____________________________________________________________________________
+create table genres(
+gen_id int Primary Key,
+gen_title char(20)
+);
+
+insert into genres values
+(3001,'Science fiction'),
+(3002,'Comedy-Drama'),
+(3003,'Action'),
+(3004,'Romance'),
+(3005,'War'),
+(3006,'Thriller');
+______________________________________________________________________________
+create table movie_genres(
+mov_id int,
+gen_id int,
+Foreign key(mov_id) references movie(mov_id),
+Foreign key(gen_id) references genres(gen_id)
+);
+
+
+
+insert into movie_genres values
+(101,3002),
+(102,3002),
+(103,3001),
+(104,3006),
+(105,3004),
+(106,3001),
+(107,3003),
+(108,3006),
+(109,3005),
+(110,3003);
+__________________________________________________________________________________
+create table reviewer(
+rev_id int Primary Key,
+rev_name char(30)
+);
+
+insert into reviewer values
+(5001,'IMdb'),
+(5002,'Times of India'),
+(5003,'Bollywood Hungama');
+
+_______________________________________________________________________________
+create table rating(
+mov_id int,
+rev_id int,
+rev_stars int,
+num_o_rating int,
+Foreign Key(mov_id) references movie(mov_id),
+Foreign Key(rev_id) references reviewer(rev_id)
+);
+
+insert into rating values
+(101,5001,3,7),
+(101,5002,3,7),
+(101,5003,4,8),
+(102,5001,4,7),
+(102,5002,5,9),
+(102,5003,4,8),
+(103,5001,3,7),
+(103,5002,4,7),
+(103,5003,3,8),
+(104,5001,4,9),
+(104,5002,4,8),
+(104,5003,4,9),
+(105,5001,3,7),
+(105,5002,3,7),
+(105,5003,3,8),
+(106,5001,3,8),
+(106,5002,3,8),
+(106,5003,4,8),
+(107,5001,4,8),
+(107,5002,3,8),
+(107,5003,4,8),
+(108,5001,3,7),
+(108,5002,3,7),
+(108,5003,3,8),
+(109,5001,4,9),
+(109,5002,4,9),
+(109,5003,4,8),
+(110,5001,3,8),
+(110,5002,3,7),
+(110,5003,3,8);
+
+________________________________________________________________________________
+
